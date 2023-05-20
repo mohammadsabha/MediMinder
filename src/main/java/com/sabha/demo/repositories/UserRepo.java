@@ -1,19 +1,20 @@
 package com.sabha.demo.repositories;
 
+
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.sabha.demo.models.Clinic;
+import com.sabha.demo.models.User;
 @Repository
 
-public interface ClinicRepo extends CrudRepository<Clinic, Long>{
+public interface UserRepo extends CrudRepository<User, Long>{
 	
-	Optional<Clinic> findById(Long id);
+	Optional<User> findById(Long id);
 	
-	List<Clinic> findAll();
+	List<User> findAll();
 
 	
 
