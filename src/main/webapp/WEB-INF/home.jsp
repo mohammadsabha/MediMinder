@@ -21,16 +21,16 @@
 	<nav class="navbar navbar-light bg-light">
 	  <div class="container">
 	    <a class="navbar-brand" href="#">
-	      <img src="/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="30" height="24">
+	      <img src="/images/Background.png" alt="" width="200" height="160">
 	    </a>
-	    <a class="logout" href="/logout">LogOut</a>
+	    <a class="btn btn-success" href="/logout" role="button">LogOut</a>
 	  </div>
 	</nav>
    <div class="body-container">
    		<div class="dr-table">
-   			<h4>Doctors</h4>
+   			<h4 style="color:#198754;">Doctors</h4>
    			<table class="table">
-			  <thead>
+			  <thead style="background-color:#198754;">
 			    <tr>
 			      <th scope="col">Dr. Name</th>
 			      <th scope="col">Email</th>
@@ -49,13 +49,13 @@
 			   </C:forEach>
 			   </tbody>
 			</table>
-			<button type="button" class="btn btn-success" href="/createdoctor">Add Doctor</button>
+			<!-- <button type="button" class="btn btn-success" href="/createdoctor">Add Doctor</button> -->
 			<a class="btn btn-success" id="add-dr" href="/createdoctor" role="button">Add Doctor</a>
    		</div>
    		<div class="pnt-table">
-   			<h4>Patients</h4>
+   			<h4 style="color:#198754;">Patients</h4>
    			<table class="table">
-			  <thead>
+			  <thead style="background-color:#198754;">
 			    <tr>
 			      <th scope="col">Name</th>
 			      <th scope="col">Email</th>
