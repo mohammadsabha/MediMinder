@@ -11,9 +11,8 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>java</title>
-    <!-- <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css"> -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <title>MediMinder</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/main.css"> <!-- change to match your file/naming structure -->
     <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/js/app.js"></script><!-- change to match your file/naming structure -->
@@ -27,13 +26,13 @@
 		    <a class="btn btn-success"  href="/login" role="button">LogIn</a> 
 		  </div>
 		</nav>
-	<div class="admin-body">
-		<div class="clinic-in">
+	<div class="dr-body">
+		<div class="dr-in">
 			<h4 style="color:#198754;">Add a new patient</h4>
 			<div class="form-outline mb-4">
             <input type="text" id="form3Example3" class="form-control form-control-lg"
-              placeholder="Clinic Name" />
-            <label class="form-label" for="form3Example3">Clinic Name</label>
+              placeholder="Patient Name" />
+            <label class="form-label" for="form3Example3">Patient Name</label>
           </div>
           <div class="form-outline mb-4">
             <input type="email" id="form3Example3" class="form-control form-control-lg"
@@ -45,43 +44,24 @@
               placeholder="Phone No." />
             <label class="form-label" for="form3Example3">Phone No.</label>
           </div>
-          <div class="form-outline mb-4">
-            <input type="text" id="form3Example3" class="form-control form-control-lg"
-              placeholder="Address" />
-            <label class="form-label" for="form3Example3">Address</label>
-          </div>
-          <div class="form-outline mb-4">
-            <input type="password" id="form3Example3" class="form-control form-control-lg"
-              placeholder="Password" />
-            <label class="form-label" for="form3Example3">Password</label>
-          </div>
-          <div class="form-outline mb-4">
-            <input type="password" id="form3Example3" class="form-control form-control-lg"
-              placeholder="Confirm Password" />
-            <label class="form-label" for="form3Example3">Confirm Password</label>
-          </div>
-          <a class="btn btn-success" id="add-pnt" href="#" role="button">Add Clinic</a>
+          <a class="btn btn-success" id="add-pnt" href="#" role="button">Add Patient</a>
 		</div>
-		<div class="clinic-table">
-			<h4 style="color:#198754;">Clinics</h4>
+		<div class="pnt-table">
+			<h4 style="color:#198754;">Patients</h4>
    			<table class="table">
 			  <thead style="background-color:#198754;">
 			    <tr>
-			      
-			      <th scope="col">Clinic Name</th>
+			      <th scope="col">Name</th>
 			      <th scope="col">Email</th>
 			      <th scope="col">Phone No.</th>
-			      <th scope="col">Adress</th>
 			    </tr>
 			  </thead>
 			  <tbody>
-			  <C:forEach var="clinic" items="${allClinics}">
+			  <C:forEach var="pnt" items="${allPatients}">
 			    <tr>
-			      
-			      <td>${clinic.name}</td>
-			      <td>${clinic.email}</td>
-			      <td>${clinic.phone}</td>
-			      <td>${clinic.address}</td>
+			      <td>${pnt.name}</td>
+			      <td>${pnt.email}</td>
+			      <td>${pnt.phone}</td>
 			    </tr>
 			   </C:forEach> 
 			   </tbody>
