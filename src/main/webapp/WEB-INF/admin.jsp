@@ -48,46 +48,55 @@
 
   <div class="left">
     <h2>add new clinic</h2>
-   <form>
+   <form:form action="/user/new" method="post" modelAttribute="user">
     
     <div class="mb-3">
-      <label for="name" class="form-label">full name</label>
-      <input type="text" class="form-control" id="name" >
+      <label class="form-label"> full name:</label>
+      <form:input path="name" type="text" class="form-control" />
+      <form:errors path="name" class="text-danger" />
       
     </div>
   
     <div class="mb-3">
-      <label for="email" class="form-label">email</label>
-      <input type="text" class="form-control" id="email">
+      <label class="form-label"  >email:</label>
+      <form:input path="email" type="text" class="form-control" />
+      <form:errors path="email" class="text-danger" />
+
     </div>
 
     <div class="mb-3">
-      <label for="phone" class="form-label">phone</label>
-      <input type="text" class="form-control" id="phone" >
+      <label class="form-label"  >phone:</label>
+      <form:input path="phone" type="text" class="form-control" />
+      <form:errors path="phone" class="text-danger" />
+
       
     </div>
 
     
     <div class="mb-3">
-      <label for="address" class="form-label">address</label>
-      <input type="text" class="form-control" id="address" >
+      <label class="form-label"  >address:</label>
+      <form:input path="address" type="text" class="form-control" />
+      <form:errors path="address" class="text-danger" />
+
       
     </div>
   
     <div class="mb-3">
-      <label for="password" class="form-label">Password</label>
-      <input type="password" class="form-control" id="password">
+      <label class="form-label"  >password:</label>
+      <form:input path="password" type="password" class="form-control" />
+      <form:errors path="password" class="text-danger" />
+
     </div>
 
     <div class="mb-3">
-      <label for="confirm password" class="form-label">confirm Password</label>
-      <input type="password" class="form-control" id="confirm password" >
-      
+      <label class="form-label"  >confirm:</label>
+      <form:input path="confirm" type="password" class="form-control" />
+      <form:errors path="confirm" class="text-danger" />
     </div>
 
 
   <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
+  </form:form>
 </div>
 
 <div class="right">

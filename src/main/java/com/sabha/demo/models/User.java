@@ -21,9 +21,10 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
+
 @Entity
-@Table(name="clinics")
-public class Clinic {
+@Table(name="users")
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,13 +40,10 @@ public class Clinic {
     @Email(message="Please enter a valid email!")
     private String email;
     
-    @NotEmpty(message="phone is required!")
-    @Email(message="Please enter a valid phone number!")
-    @Min(6)
-    private Integer phone;
+    @Min(10)
+    private String phone;  
     
     @NotEmpty(message="address is required!")
-    @Email(message="Please enter a valid address!")
     private String address;
     
     @NotEmpty(message="Password is required!")
@@ -63,12 +61,12 @@ public class Clinic {
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date updatedAt;
     
-    @OneToMany(mappedBy="clinic", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy="user", fetch = FetchType.LAZY)
     private List<Doctor> doctors;
   
     
     
-    public Clinic() {}
+    public User() {}
     
     
 	public List<Doctor> getDoctors() {
@@ -105,11 +103,11 @@ public class Clinic {
 		this.email = email;
 	}
 
-	public Integer getPhone() {
+	public String getPhone() {
 		return phone;
 	}
 
-	public void setPhone(Integer phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 

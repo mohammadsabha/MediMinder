@@ -1,6 +1,7 @@
 package com.sabha.demo.models;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -10,8 +11,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
@@ -39,7 +39,6 @@ public class Patient {
     private String email;
     
     @NotEmpty(message="phone is required!")
-    @Email(message="Please enter a valid phone number!")
     @Min(6)
     private Integer phone;
     
@@ -53,27 +52,32 @@ public class Patient {
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date updatedAt;
     
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="doctor_id")
-    private Doctor doctor;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name="doctor_id")
+//    private Doctor doctor;
+    
+//    @ManyToMany(fetch = FetchType.LAZY)
+//    @JoinTable(
+//        name = "doctors_patients", 
+//        joinColumns = @JoinColumn(name = "patient_id"), 
+//        inverseJoinColumns = @JoinColumn(name = "doctor_id")
+//    )
+//    private List<Doctor> doctor;
+    
+    @OneToMany(mappedBy="patient", fetch = FetchType.LAZY)
+    private List<Appointment> appointments;
     
 
     
     public Patient() {}
     
-    
-    
-	public Doctor getDoctor() {
-		return doctor;
+	public List<Appointment> getAppointments() {
+		return appointments;
 	}
 
-
-
-	public void setDoctor(Doctor doctor) {
-		this.doctor = doctor;
+	public void setAppointments(List<Appointment> appointments) {
+		this.appointments = appointments;
 	}
-
-
 
 	public Long getId() {
 		return id;
