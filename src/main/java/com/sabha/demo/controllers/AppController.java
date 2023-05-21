@@ -52,9 +52,30 @@ public class AppController {
 		return "login.jsp";
 	}
 	
+	@GetMapping("/doctorlogin")
+	public String doctorLogin() {
+		return "doctorlogin.jsp";
+	}
+	
 	@GetMapping("/doctorhome")
 	public String doctorHome() {
 		return "doctorhome.jsp";
+	}
+	@GetMapping("/patientpage")
+	public String patientPage() {
+		return "patientpage.jsp";
+	}
+	@GetMapping("/createdoctor")
+	public String createDoctor() {
+		return "createdoctor.jsp";
+	}
+	@GetMapping("/updatedoctor")
+	public String updateDoctor() {
+		return "updatedoctor.jsp";
+	}
+	@GetMapping("/updatepatient")
+	public String updatePatient() {
+		return "updatepatient.jsp";
 	}
 	
 	

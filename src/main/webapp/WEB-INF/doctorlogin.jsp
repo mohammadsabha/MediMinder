@@ -45,7 +45,7 @@
           <div class="divider d-flex align-items-center my-4">
             <p class="text-center fw-bold mx-3 mb-0">with</p>
           </div>
-		<form:form action="/login" method="post" modelAttirbute="newLogin">
+		<form:form action="/doctorlogin" method="post" modelAttirbute="newLogin">
           <!-- Email input -->
           <div class="form-outline mb-4">
             <input type="email" id="form3Example3" path="email" class="form-control form-control-lg"
@@ -61,8 +61,7 @@
             <label class="form-label" for="form3Example4">Password</label>
             <form:errors path="password" class="text-danger"/>
           </div>
-		
-		
+
           <div class="d-flex justify-content-between align-items-center">
             <!-- Checkbox -->
             <div class="form-check mb-0">

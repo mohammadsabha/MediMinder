@@ -20,31 +20,38 @@
 <body>
 	<nav class="navbar navbar-light bg-light" >
 		  <div class="container" >
-		    <a class="navbar-brand" href="#">
+		    <a class="navbar-brand" href="/doctorhome">
 		      <img src="/images/Background.png" alt="" width="200px;" height="160px;">
 		    </a>
-		    <a class="btn btn-success"  href="/login" role="button">LogIn</a> 
+		    <a class="btn btn-success" href="/logout" role="button">LogOut</a> 
 		  </div>
 		</nav>
 	<div class="dr-body">
 		<div class="dr-in">
 			<h4 style="color:#198754;">Add a new patient</h4>
+			<form:form action="/createPatient" method="post" modelAttribute="patient">
 			<div class="form-outline mb-4">
-            <input type="text" id="form3Example3" class="form-control form-control-lg"
+            <input type="text" id="form3Example3" path="name" class="form-control form-control-lg"
               placeholder="Patient Name" />
-            <label class="form-label" for="form3Example3">Patient Name</label>
+            <form:errors path="name" class="text-danger"/>
           </div>
           <div class="form-outline mb-4">
-            <input type="email" id="form3Example3" class="form-control form-control-lg"
+            <input type="email" id="form3Example3" path="email" class="form-control form-control-lg"
               placeholder="Enter a valid email address" />
-            <label class="form-label" for="form3Example3">Email address</label>
+            <form:errors path="email" class="text-danger"/>
           </div>
           <div class="form-outline mb-4">
-            <input type="text" id="form3Example3" class="form-control form-control-lg"
+            <input type="text" id="form3Example3" path="phone" class="form-control form-control-lg"
               placeholder="Phone No." />
-            <label class="form-label" for="form3Example3">Phone No.</label>
+            <form:errors path="phone" class="text-danger"/>
           </div>
-          <a class="btn btn-success" id="add-pnt" href="#" role="button">Add Patient</a>
+          <div class="form-outline mb-4">
+            <input type="date" id="form3Example3" path="date" class="form-control form-control-lg"
+              placeholder="BirthDay" />
+            <form:errors path="date" class="text-danger"/>
+          </div>
+          <button type="button" class="btn btn-success btn-lg">Add Patient</button>
+          </form:form>
 		</div>
 		<div class="pnt-table">
 			<h4 style="color:#198754;">Patients</h4>
@@ -53,6 +60,7 @@
 			    <tr>
 			      <th scope="col">Name</th>
 			      <th scope="col">Email</th>
+			      <th scope="col">BirthDay</th>
 			      <th scope="col">Phone No.</th>
 			    </tr>
 			  </thead>
@@ -61,6 +69,7 @@
 			    <tr>
 			      <td>${pnt.name}</td>
 			      <td>${pnt.email}</td>
+			      <td>${pnt.date}</td>
 			      <td>${pnt.phone}</td>
 			    </tr>
 			   </C:forEach> 

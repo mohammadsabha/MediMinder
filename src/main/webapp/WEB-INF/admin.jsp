@@ -11,7 +11,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>java</title>
+    <title>MediMinder</title>
     <!-- <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css"> -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/main.css"> <!-- change to match your file/naming structure -->
@@ -21,46 +21,49 @@
 <body>
 	<nav class="navbar navbar-light bg-light" >
 		  <div class="container" >
-		    <a class="navbar-brand" href="#">
+		    <a class="navbar-brand" href="/">
 		      <img src="/images/Background.png" alt="" width="200px;" height="160px;">
 		    </a>
-		    <a class="btn btn-success"  href="/login" role="button">LogIn</a> 
+		    <a class="btn btn-success" href="/logout" role="button">LogOut</a> 
 		  </div>
 		</nav>
 	<div class="admin-body">
+		<form:form action="/addClinic" method="post" modelArribute="newClinic">
 		<div class="clinic-in">
-			<h4 style="color:#198754;">Add a new patient</h4>
+			<h4 style="color:#198754;">Add a new clinic</h4>
 			<div class="form-outline mb-4">
-            <input type="text" id="form3Example3" class="form-control form-control-lg"
+            <input type="text" id="form3Example3" path="name" class="form-control form-control-lg"
               placeholder="Clinic Name" />
-            <label class="form-label" for="form3Example3">Clinic Name</label>
+            
           </div>
           <div class="form-outline mb-4">
-            <input type="email" id="form3Example3" class="form-control form-control-lg"
+            <input type="email" id="form3Example3" path="email" class="form-control form-control-lg"
               placeholder="Enter a valid email address" />
-            <label class="form-label" for="form3Example3">Email address</label>
+            
           </div>
           <div class="form-outline mb-4">
-            <input type="text" id="form3Example3" class="form-control form-control-lg"
+            <input type="text" id="form3Example3" path="phone" class="form-control form-control-lg"
               placeholder="Phone No." />
-            <label class="form-label" for="form3Example3">Phone No.</label>
+            
           </div>
           <div class="form-outline mb-4">
-            <input type="text" id="form3Example3" class="form-control form-control-lg"
+            <input type="text" id="form3Example3" path="address" class="form-control form-control-lg"
               placeholder="Address" />
-            <label class="form-label" for="form3Example3">Address</label>
+            
           </div>
           <div class="form-outline mb-4">
-            <input type="password" id="form3Example3" class="form-control form-control-lg"
+            <input type="password" id="form3Example3" path="password" class="form-control form-control-lg"
               placeholder="Password" />
-            <label class="form-label" for="form3Example3">Password</label>
+            
           </div>
           <div class="form-outline mb-4">
-            <input type="password" id="form3Example3" class="form-control form-control-lg"
+            <input type="password" id="form3Example3" path="confirm" class="form-control form-control-lg"
               placeholder="Confirm Password" />
-            <label class="form-label" for="form3Example3">Confirm Password</label>
+            
           </div>
-          <a class="btn btn-success" id="add-pnt" href="#" role="button">Add Clinic</a>
+      
+          <input class="btn btn-success" id="toright" type="submit" value="Create Clinic">
+          </form:form>
 		</div>
 		<div class="clinic-table">
 			<h4 style="color:#198754;">Clinics</h4>
@@ -71,7 +74,7 @@
 			      <th scope="col">Clinic Name</th>
 			      <th scope="col">Email</th>
 			      <th scope="col">Phone No.</th>
-			      <th scope="col">Adress</th>
+			      <th scope="col">Address</th>
 			    </tr>
 			  </thead>
 			  <tbody>
