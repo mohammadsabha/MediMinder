@@ -5,12 +5,16 @@ import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
@@ -34,7 +38,6 @@ public class User {
     @Size(min=3, max=30, message="name must be between 3 and 30 characters")
     private String name;
     
-
 
     @NotEmpty(message="Email is required!")
     @Email(message="Please enter a valid email!")
@@ -64,11 +67,16 @@ public class User {
     @OneToMany(mappedBy="user", fetch = FetchType.LAZY)
     private List<Doctor> doctors;
   
-    
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+        name = "users_roles", 
+        joinColumns = @JoinColumn(name = "user_id"), 
+        inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private List<Role> roles;
     
     public User() {}
-    
-    
+
+
 	public List<Doctor> getDoctors() {
 		return doctors;
 	}
@@ -151,6 +159,18 @@ public class User {
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
+	
+	
+
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
+
 
 	@PreUpdate
     protected void onUpdate(){
