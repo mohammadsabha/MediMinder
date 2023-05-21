@@ -25,47 +25,60 @@
 		    <a class="navbar-brand" href="/">
 		      <img src="/images/Background.png" alt="" width="200px;" height="160px;">
 		    </a>
-		    <a class="btn btn-success" href="/logout" role="button">LogOut</a> 
+
+		    <form id="logoutForm" method="POST" action="/logout">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        <input type="submit" value="Logout!" class="btn btn-success" />
+    </form>
+
 		  </div>
 		</nav>
 	<div class="admin-body">
 		<form:form action="/addClinic" method="post" modelArribute="newClinic">
 		<div class="clinic-in">
-			<h4 style="color:#198754;">Add a new clinic</h4>
+
+			<h4 style="color:#198754;">Add a new Clinic</h4>
 			<div class="form-outline mb-4">
-            <input type="text" id="form3Example3" path="name" class="form-control form-control-lg"
-              placeholder="Clinic Name" />
-            
+			<form:form action="/clinicregister" method="post" modelAttribute="newClinic" >
+			
+            <form:input type="text" path="name" class="form-control form-control-lg" placeholder="Clinic Name" />
+            <label class="form-label" for="form3Example3">Clinic Name</label>
+            <form:errors path="name" class="text-danger" />
           </div>
           <div class="form-outline mb-4">
-            <input type="email" id="form3Example3" path="email" class="form-control form-control-lg"
+            <form:input type="email" path="email" class="form-control form-control-lg"
               placeholder="Enter a valid email address" />
-            
+            <label class="form-label" for="form3Example3">Email address</label>
+            <form:errors path="email" class="text-danger" />
           </div>
           <div class="form-outline mb-4">
-            <input type="text" id="form3Example3" path="phone" class="form-control form-control-lg"
+            <form:input type="text" path="phone" class="form-control form-control-lg"
               placeholder="Phone No." />
-            
+            <label class="form-label" for="form3Example3">Phone No.</label>
+            <form:errors path="phone" class="text-danger" />
           </div>
           <div class="form-outline mb-4">
-            <input type="text" id="form3Example3" path="address" class="form-control form-control-lg"
+            <form:input type="text" path="address" class="form-control form-control-lg"
               placeholder="Address" />
-            
+            <label class="form-label" for="form3Example3">Address</label>
+            <form:errors path="address" class="text-danger" />
           </div>
           <div class="form-outline mb-4">
-            <input type="password" id="form3Example3" path="password" class="form-control form-control-lg"
+            <form:input type="password" path="password" class="form-control form-control-lg"
               placeholder="Password" />
-            
+            <label class="form-label" for="form3Example3">Password</label>
+            <form:errors path="password" class="text-danger" />
           </div>
           <div class="form-outline mb-4">
-            <input type="password" id="form3Example3" path="confirm" class="form-control form-control-lg"
+            <form:input type="password" path="confirm" class="form-control form-control-lg"
               placeholder="Confirm Password" />
-            
+            <label class="form-label" for="form3Example3">Confirm Password</label>
+            <form:errors path="confirm" class="text-danger" />
           </div>
-      
-          <input class="btn btn-success" id="toright" type="submit" value="Create Clinic">
-          </form:form>
+          <input type="submit" value="Add Clinic" class="btn btn-success btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem;" />
+
 		</div>
+		 </form:form>
 		<div class="clinic-table">
 			<h4 style="color:#198754;">Clinics</h4>
    			<table class="table">
@@ -79,7 +92,7 @@
 			    </tr>
 			  </thead>
 			  <tbody>
-			  <C:forEach var="clinic" items="${allClinics}">
+			  <c:forEach items="${allClinics1}" var="clinic">
 			    <tr>
 			      
 			      <td>${clinic.name}</td>
@@ -87,7 +100,7 @@
 			      <td>${clinic.phone}</td>
 			      <td>${clinic.address}</td>
 			    </tr>
-			   </C:forEach> 
+			   </c:forEach> 
 			   </tbody>
 			</table>
 		</div>

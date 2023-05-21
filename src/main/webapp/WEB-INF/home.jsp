@@ -39,14 +39,16 @@
 			    </tr>
 			  </thead>
 			  <tbody>
-			  <C:forEach var="dr" items="${doctors}">
+
+			  <c:forEach var="dr" items="${allDoctors}">
+
 			    <tr>
 			      <td>${dr.name}</td>
 			      <td>${dr.email}</td>
 			      <td>${dr.address}</td>
 			      <td>${dr.phone}</td>
 			    </tr>
-			   </C:forEach>
+			   </c:forEach>
 			   </tbody>
 			</table>
 			<!-- <button type="button" class="btn btn-success" href="/createdoctor">Add Doctor</button> -->
@@ -63,13 +65,15 @@
 			    </tr>
 			  </thead>
 			  <tbody>
-			  <C:forEach var="pnt" items="${patients}">
+
+			  <c:forEach var="pnt" items="${allPatients}">
+
 			    <tr>
 			      <td>${pnt.name}</td>
 			      <td>${pnt.email}</td>
 			      <td>${pnt.phone}</td>
 			    </tr>
-			   </C:forEach> 
+			   </c:forEach> 
 			   </tbody>
 			</table>
    		</div>
