@@ -14,5 +14,7 @@ public interface DoctorRepo extends CrudRepository<Doctor, Long>{
 	Optional<Doctor> findById(Long id);
 	
 	List<Doctor> findAll();
+	
+	Optional<Doctor> findByEmail(String email);
 
 }

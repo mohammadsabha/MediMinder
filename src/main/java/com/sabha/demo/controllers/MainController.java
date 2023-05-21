@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.sabha.demo.models.Clinic;
 import com.sabha.demo.models.Doctor;
 import com.sabha.demo.models.LoginClinic;
+import com.sabha.demo.models.LoginDoctor;
 import com.sabha.demo.models.Patient;
 import com.sabha.demo.services.ClinicService;
 import com.sabha.demo.services.DoctorService;
@@ -114,10 +115,27 @@ public String clinic(Model model) {
 	
 	List<Doctor> allDoctors = doctorService.allDoctors();
 	model.addAttribute("allDoctors", allDoctors);
-	return "clinic.jsp";
+	return "home.jsp";
 }
 
-
+//------------------------- start doctor login
+@GetMapping("/doctorlogin")
+public String doctorLogin(Model model) {
+	model.addAttribute("newLogin", new LoginDoctor());
+	return "doctorLogin.jsp";
+}
+@PostMapping("/doctorlogin")
+public String doctorLogin(@Valid @ModelAttribute("newLogin") LoginDoctor newLogin, 
+        BindingResult result, Model model, HttpSession session) {
+    Doctor doctor = doctorService.loginDoctor(newLogin, result);
+    if(result.hasErrors()) {
+        model.addAttribute("newDoctor", new Doctor());
+        return "doctorLogin.jsp";
+    }
+    session.setAttribute("doctor_id", doctor.getId());
+    return "redirect:/doctorhome";
+}
+//------------------------------end doctor login 
 
 //--------------------------------start create doctor
 @GetMapping("/creatdoctor")
