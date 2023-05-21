@@ -23,8 +23,8 @@ public class WebSecurityConfig {
         http
             .authorizeHttpRequests((authorize) -> authorize
             		.requestMatchers("/admin/**").hasRole("ADMIN")
-            		.requestMatchers("/", "/home").authenticated()
-	                .anyRequest().permitAll()
+//            		.requestMatchers("/", "/home").authenticated()
+//	                .anyRequest().permitAll()
             )
             .formLogin(login -> login
                     .loginPage("/login")
