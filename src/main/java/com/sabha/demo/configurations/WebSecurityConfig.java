@@ -10,7 +10,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
-	private UserDetailsService userDetailsService;
+private UserDetailsService userDetailsService;
 	
 	@Bean
 	public BCryptPasswordEncoder bCryptPasswordEncoder() {
@@ -24,6 +24,7 @@ public class WebSecurityConfig {
             		.requestMatchers("/create/**").hasRole("ADMIN")
 //            		.requestMatchers("/", "/home").authenticated()
 	                .anyRequest().permitAll()
+
             )
             .formLogin(login -> login
                     .loginPage("/login")
