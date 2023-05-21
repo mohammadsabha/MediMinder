@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import com.sabha.demo.models.Clinic;
 import com.sabha.demo.models.Doctor;
 @Repository
 
@@ -15,4 +16,6 @@ public interface DoctorRepo extends CrudRepository<Doctor, Long>{
 	
 	List<Doctor> findAll();
 
+	Optional<Doctor> findByEmail(String email);
+	
 }
