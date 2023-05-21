@@ -15,12 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sabha.demo.models.Clinic;
 import com.sabha.demo.models.Doctor;
-
-import com.sabha.demo.models.LoginDoctor;
-
 import com.sabha.demo.models.LoginClinic;
-
+import com.sabha.demo.models.LoginDoctor;
 import com.sabha.demo.models.Patient;
+import com.sabha.demo.models.User;
 import com.sabha.demo.services.ClinicService;
 import com.sabha.demo.services.DoctorService;
 import com.sabha.demo.services.PatientService;
@@ -49,7 +47,7 @@ return "index.jsp";
 }
 
 
-@GetMapping("/create")
+@GetMapping("/admin")
 public String admin(Model model) {
 	List <Clinic> allClinics1=clinicServ.allClinic();
 	model.addAttribute("allClinics1", allClinics1);
@@ -63,11 +61,19 @@ public String register(@Valid @ModelAttribute("newClinic") Clinic newClinic,
     clinicServ.registerClinic(newClinic, result);
     if(result.hasErrors()) {
         model.addAttribute("newLogin", new LoginClinic());
+        List <Clinic> allClinics1=clinicServ.allClinic();
+    	model.addAttribute("allClinics1", allClinics1);
         return "admin.jsp";
     }
     session.setAttribute("clinic_id", newClinic.getId());
-    return "redirect:/create";
+    return "redirect:/admin";
 }
+
+@GetMapping("/cliniclogin")
+public String cliniclogin2(@ModelAttribute("newLogin") LoginClinic newLogin) {
+	return "login.jsp";
+}
+
 
 @PostMapping("/cliniclogin")
 public String clinicLogin(@Valid @ModelAttribute("newLogin") LoginClinic newLogin, 
@@ -97,54 +103,30 @@ public String home(Model model) {
 
 
 
-@GetMapping("/login")
-public String login(Model model) {
-	model.addAttribute("newUser", new User());
-    model.addAttribute("newLogin", new LoginUser());
-	return "login.jsp";
-}
 
-
-
-
-@PostMapping("/login")
-public String login(@Valid @ModelAttribute("newLogin") LoginUser newLogin, 
-        BindingResult result, Model model, HttpSession session) {
-    
-    // Add once service is implemented:
-	 User user = userServ.login(newLogin, result);
-    // User user = userServ.login(newLogin, result);
-
-    if(result.hasErrors()) {
-        model.addAttribute("newUser", new User());
-        return "index.jsp";
-    }
-    session.setAttribute("user_id", user.getId());
-    return "redirect:/home";
-}
 //----------------------------start doctor login
 @GetMapping("/doctorlogin")
-public String doctorLogin(Model model) {
-	model.addAttribute("newDoctor", new Doctor());
-    model.addAttribute("newLoginDoctor", new LoginDoctor());
-	return "doctorLogin.jsp";
+public String doctorLogin(Model model,@ModelAttribute("newLoginDoctor") LoginDoctor newLoginDoctor) {
+//	model.addAttribute("newDoctor", new Doctor());
+//    model.addAttribute("newLoginDoctor", new LoginDoctor());
+	return "doctorlogin.jsp";
 }
 
-	//@PostMapping("/doctorLogin")
-	//public String doctorLogin(@Valid @ModelAttribute("newLoginDoctor") LoginDoctor newLoginDoctor, 
-	//        BindingResult result, Model model, HttpSession session) {
-	//    
-	//    // Add once service is implemented:
-	//	 Doctor doctor = doctorService.login(newLoginDoctor, result);
-	//    // User user = userServ.login(newLogin, result);
-	//
-	//    if(result.hasErrors()) {
-	//        model.addAttribute("newDoctor", new Doctor());
-	//        return "index.jsp";
-	//    }
-	//    session.setAttribute("doctor_id", doctor.getId());
-	//    return "redirect:/home";
-	//}
+	@PostMapping("/doctorlogin")
+	public String doctorLogin(@Valid @ModelAttribute("newLoginDoctor") LoginDoctor newLoginDoctor, 
+	        BindingResult result, Model model, HttpSession session) {
+	    
+	    // Add once service is implemented:
+		 Doctor doctor = doctorService.loginDoctor(newLoginDoctor, result);
+	    // User user = userServ.login(newLogin, result);
+	
+	    if(result.hasErrors()) {
+	        model.addAttribute("newDoctor", new Doctor());
+	        return "index.jsp";
+	    }
+	    session.setAttribute("doctor_id", doctor.getId());
+	    return "redirect:/home";
+	}
 //---------------------------------end doctor login
 
 //@GetMapping("/doctorhome")
@@ -178,8 +160,8 @@ public String createDoctor2(@Valid @ModelAttribute("doctor") Doctor doctor, Bind
         model.addAttribute("doctor", doctor);
         return "createdoctor.jsp";
     } else {
-    	doctorService.addDoctor(doctor);
-        return "redirect:/createdoctor";
+    	doctorService.registerDoctor(doctor, result);
+        return "redirect:/clinic";
     }
 }
 //-----------------------------------end create doctor

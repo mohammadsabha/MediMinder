@@ -27,7 +27,7 @@
 		      <img src="/images/Background.png" alt="" width="200px;" height="160px;">
 		    </a>
 		    <div>
-		    <a class="btn btn-success"  href="/login" role="button" style="margin-bottom:5px; padding-right:18px; padding-left:15px;">LogIn As Clinic</a><br>
+		    <a class="btn btn-success"  href="/cliniclogin" role="button" style="margin-bottom:5px; padding-right:18px; padding-left:15px;">LogIn As Clinic</a><br>
 		    <a class="btn btn-success"  href="/doctorlogin" role="button" style="margin-bottom:5px; ">LogIn As Doctor</a> 
 		    </div>
 		  </div>
