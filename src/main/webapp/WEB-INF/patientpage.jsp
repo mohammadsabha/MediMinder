@@ -30,7 +30,7 @@
 	<div class="patient-body">
 	
 		<div class="appointment" style="margin-top:35px;">
-			<form:form action="/addAppointment" method="post">
+			<form:form action="/addAppointment" method="post" modelAttribute="appointment">
 				<div class="form-outline w-100 mb-4">
 				  <textarea class="form-control" id="textAreaExample4" rows="3" placeholder="symptoms"></textarea>
 				  
@@ -76,9 +76,9 @@
 		
 		<div class="ptn-left">
 			<section>
-			<a href="/updatepatient" style="text-decoration: none;">
+			<a href="/updatepatient/${patient.id}" style="text-decoration: none;">
 			<div class="row d-flex justify-content-center">
-				<div class="col-md-6 mb-5 mb-md-0">
+				<div class="col-md-16 mb-5 mb-md-0">
 				  <div class="card testimonial-card">
 					<div class="card-up" style="background-color: #198754;"></div>
 					<div class="avatar mx-auto bg-white">
@@ -86,12 +86,11 @@
 						class="rounded-circle img-fluid" />
 					</div>
 					<div class="card-body">
-					  <h4 class="mb-4">Maria Smantha</h4>
+					  <h4 class="mb-4">${patient.name} Maria Smith</h4>
 					  <hr />
 					  <p class="dark-grey-text mt-4">
-						<i class="fas fa-quote-left pe-2"></i>Lorem ipsum dolor sit amet eos adipisci,
-						consectetur adipisicing elit.
-					  </p>
+						<i class="fas fa-quote-left pe-2"></i>${patient.date}
+					  
 					</div>
 				  </div>
 				</div>

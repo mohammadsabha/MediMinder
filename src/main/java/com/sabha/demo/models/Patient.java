@@ -39,8 +39,8 @@ public class Patient {
     private String email;
     
     @NotEmpty(message="phone is required!")
-    @Min(6)
-    private Integer phone;
+    @Min(10)
+    private String phone;
     
 
     private Date date;
@@ -115,13 +115,13 @@ public class Patient {
 
 
 
-	public Integer getPhone() {
+	public String getPhone() {
 		return phone;
 	}
 
 
 
-	public void setPhone(Integer phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 

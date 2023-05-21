@@ -39,7 +39,7 @@
 			    </tr>
 			  </thead>
 			  <tbody>
-			  <C:forEach var="dr" items="${allDoctors}">
+			  <C:forEach var="dr" items="${doctors}">
 			    <tr>
 			      <td>${dr.name}</td>
 			      <td>${dr.email}</td>
@@ -63,7 +63,7 @@
 			    </tr>
 			  </thead>
 			  <tbody>
-			  <C:forEach var="pnt" items="${allPatients}">
+			  <C:forEach var="pnt" items="${patients}">
 			    <tr>
 			      <td>${pnt.name}</td>
 			      <td>${pnt.email}</td>

@@ -44,8 +44,8 @@ public class Doctor {
     private String email;
     
     @NotEmpty(message="phone is required!")
-    @Min(6)
-    private Integer phone;
+    @Min(10)
+    private String phone;
     
     @NotEmpty(message="address is required!")
     private String address;
@@ -159,10 +159,10 @@ public class Doctor {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public Integer getPhone() {
+	public String getPhone() {
 		return phone;
 	}
-	public void setPhone(Integer phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 	public String getAddress() {

@@ -50,7 +50,7 @@
               placeholder="BirthDay" />
             <form:errors path="date" class="text-danger"/>
           </div>
-          <button type="button" class="btn btn-success btn-lg">Add Patient</button>
+          <button type="submit" class="btn btn-success btn-lg">Add Patient</button>
           </form:form>
 		</div>
 		<div class="pnt-table">

@@ -34,7 +34,7 @@
                 <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Update a Patient</p>
 
                 <form class="mx-1 mx-md-4">
-				<form:form>
+				<form:form action="/updatePatient/${patient.id}" method="post" modelAttribute="patient">
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
@@ -73,7 +73,7 @@
 
                   <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                     <button type="submit" class="btn btn-success btn-lg" style="margin-right:5px;">Update Patient</button>
-                    <button type="button" class="btn btn-success btn-lg">Delete</button>
+                    <a href="/deletepatient/${patient.id}"><button type="button" class="btn btn-success btn-lg">Delete</button></a>
                   </div>
 				</form:form>
                 </form>

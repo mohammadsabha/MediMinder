@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sabha.demo.models.Doctor;
+import com.sabha.demo.models.LoginDoctor;
 import com.sabha.demo.models.LoginUser;
 import com.sabha.demo.models.Patient;
 import com.sabha.demo.models.User;
@@ -37,8 +38,8 @@ public class MainController {
 	private UserService userServ;
 	
 @RequestMapping("/")
-public String showLoginPage(Model model) {
-return "login.jsp";
+public String showIndex(Model model) {
+return "index.jsp";
 }
 
 
@@ -96,15 +97,50 @@ public String home(Model model) {
 //}
 
 @GetMapping("/login")
-public String login() {
+public String login(Model model) {
+	model.addAttribute("newUser", new User());
+    model.addAttribute("newLogin", new LoginUser());
 	return "login.jsp";
 }
 
+@PostMapping("/login")
+public String login(@Valid @ModelAttribute("newLogin") LoginUser newLogin, 
+        BindingResult result, Model model, HttpSession session) {
+    
+    // Add once service is implemented:
+	 User user = userServ.login(newLogin, result);
+    // User user = userServ.login(newLogin, result);
+
+    if(result.hasErrors()) {
+        model.addAttribute("newUser", new User());
+        return "index.jsp";
+    }
+    session.setAttribute("user_id", user.getId());
+    return "redirect:/home";
+}
 //----------------------------start doctor login
-@GetMapping("/doctorLogin")
-public String doctorLogin() {
+@GetMapping("/doctorlogin")
+public String doctorLogin(Model model) {
+	model.addAttribute("newDoctor", new Doctor());
+    model.addAttribute("newLoginDoctor", new LoginDoctor());
 	return "doctorLogin.jsp";
 }
+
+	//@PostMapping("/doctorLogin")
+	//public String doctorLogin(@Valid @ModelAttribute("newLoginDoctor") LoginDoctor newLoginDoctor, 
+	//        BindingResult result, Model model, HttpSession session) {
+	//    
+	//    // Add once service is implemented:
+	//	 Doctor doctor = doctorService.login(newLoginDoctor, result);
+	//    // User user = userServ.login(newLogin, result);
+	//
+	//    if(result.hasErrors()) {
+	//        model.addAttribute("newDoctor", new Doctor());
+	//        return "index.jsp";
+	//    }
+	//    session.setAttribute("doctor_id", doctor.getId());
+	//    return "redirect:/home";
+	//}
 //---------------------------------end doctor login
 
 //@GetMapping("/doctorhome")
@@ -128,18 +164,18 @@ public String clinic(Model model) {
 
 
 //--------------------------------start create doctor
-@GetMapping("/creatdoctor")
+@GetMapping("/createdoctor")
 public String createDoctor(HttpSession session, Model model,@ModelAttribute("doctor") Doctor doctor) {
- return "creatdoctor.jsp";
+ return "createdoctor.jsp";
 } 
-@PostMapping("/creatdoctor")
+@PostMapping("/createdoctor")
 public String createDoctor2(@Valid @ModelAttribute("doctor") Doctor doctor, BindingResult result, Model model) {
     if (result.hasErrors()) {
         model.addAttribute("doctor", doctor);
-        return "creatdoctor.jsp";
+        return "createdoctor.jsp";
     } else {
     	doctorService.addDoctor(doctor);
-        return "redirect:/creatdoctor";
+        return "redirect:/createdoctor";
     }
 }
 //-----------------------------------end create doctor
@@ -159,7 +195,7 @@ public String updateDoctor2(@Valid @ModelAttribute("doctor") Doctor doctor, Bind
        if (result.hasErrors()) {
     	   Doctor doctor1 =doctorService.findDoctorById(id);
 
-           model.addAttribute("doctor1", doctor1);
+           model.addAttribute("doctor", doctor1);
            return "updateDoctor.jsp";
        } else {
     	   doctorService.addDoctor(doctor);
@@ -176,27 +212,36 @@ public String createPatient(HttpSession session, Model model,@ModelAttribute("pa
 	model.addAttribute("allPatients", allPatients);
  return "doctorhome.jsp";
 } 
-@PostMapping("/doctorhome")
-public String createPatient2(@Valid @ModelAttribute("patient") Patient patient, BindingResult result, Model model) {
-    if (result.hasErrors()) {
-        model.addAttribute("patient", patient);
-    	List<Patient> allPatients = patientService.allPatients();
-    	model.addAttribute("allPatients", allPatients);
-        return "doctorhome.jsp";
-    } else {
-    	patientService.addPatient(patient);
-        return "redirect:/doctorhome";
-    }
-}
+	@PostMapping("/createPatient")
+	public String createPatient2(@Valid @ModelAttribute("patient") Patient patient, BindingResult result, Model model) {
+	    if (result.hasErrors()) {
+	        model.addAttribute("patient", patient);
+	    	List<Patient> allPatients = patientService.allPatients();
+	    	model.addAttribute("allPatients", allPatients);
+	        return "doctorhome.jsp";
+	    } else {
+	    	patientService.addPatient(patient);
+	        return "redirect:/doctorhome";
+	    }
+	}
 //--------------------------------------end create patient
 
+//______________________________________start patient page
+@GetMapping("/patient/{id}")
+public String patientPage(@PathVariable("id") Long id , Model model) {
+Patient patient1 = patientService.findPatientById(id);
+model.addAttribute("patient", patient1);
+return "patientpage.jsp";
+}
+
 //-----------------------------------------start update Patient
+
 @GetMapping("/updatePatient/{id}")
 public String updatePatient(HttpSession session, Model model,@ModelAttribute("patient") Patient patient,@PathVariable("id") Long id) {
 
 	Patient patient1 = patientService.findPatientById(id);
-	model.addAttribute("patient1", patient1);
-	 return "updatePatient.jsp";
+	model.addAttribute("patient", patient1);
+	 return "updatepatient.jsp";
 }
 
 @PutMapping("/updatePatient/{id}")
@@ -204,11 +249,11 @@ public String updatePatient2(@Valid @ModelAttribute("patient") Patient patient, 
        if (result.hasErrors()) {
     	   Patient patient1 = patientService.findPatientById(id);
 
-           model.addAttribute("patient1", patient1);
-           return "updatePatient.jsp";
+           model.addAttribute("patient", patient1);
+           return "updatepatient.jsp";
        } else {
     	   patientService.addPatient(patient);
-           return "redirect:/updatePatient/"+id;
+           return "redirect:/updatepatient/"+id;
        }
    }
 //-----------------------------------------end update Patient
