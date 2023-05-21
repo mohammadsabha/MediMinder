@@ -12,6 +12,7 @@
 	display:flex;
 	justify-content:space-around;
 	/*margin-top:30px;*/
+	flex-flow: row wrap;
 }
 .dr-table , .pnt-table {
 	width:550px;
@@ -41,4 +42,38 @@
 }
 .clinic-in h4 {
 	margin-bottom:30px;
+
 }
+
+.clinic-table {
+	margin-top:30px;
+}
+
+
+.patient-body {
+	display:flex;
+	justify-content:space-around;
+	width:100%;
+}
+.testimonial-card .card-up {
+height: 120px;
+overflow: hidden;
+border-top-left-radius: 0.25rem;
+border-top-right-radius: 0.25rem;
+}
+
+.testimonial-card .avatar {
+width: 110px;
+margin-top: -60px;
+overflow: hidden;
+border: 3px solid #fff;
+border-radius: 50%;
+}
+.ptn-right {
+	margin-top:35px;
+}
+.ptn-left {
+	margin-top:35px;
+}
+
+

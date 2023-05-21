@@ -16,38 +16,55 @@
     <link rel="stylesheet" href="/css/main.css"> <!-- change to match your file/naming structure -->
     <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/js/app.js"></script><!-- change to match your file/naming structure -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    
+    
 </head>
-<body onload="function (response)">
+<body onload="getEndlessAPIData()">
 	<nav class="navbar navbar-light bg-light" >
 		  <div class="container" >
-		    <a class="navbar-brand" href="#">
+		    <a class="navbar-brand" href="/">
 		      <img src="/images/Background.png" alt="" width="200px;" height="160px;">
 		    </a>
-		    <a class="btn btn-success"  href="/login" role="button">LogIn</a> 
+		    <div>
+		    <a class="btn btn-success"  href="/login" role="button" style="margin-bottom:5px; padding-right:18px; padding-left:15px;">LogIn As Clinic</a><br>
+		    <a class="btn btn-success"  href="/doctorlogin" role="button" style="margin-bottom:5px; ">LogIn As Doctor</a> 
+		    </div>
 		  </div>
 		</nav>
    <div id="welcome-page" style="width:100%; height:500px;">
    		
    </div>
-   <script type="text/javascript">
-   const settings = {
-			async: true,
-			crossDomain: true,
-			url: 'https://endlessmedicalapi1.p.rapidapi.com/GetFeatures',
-			method: 'GET',
-			headers: {
-				'X-RapidAPI-Key': '3c1fe96527mshf1a599531d3e26dp1724b4jsn885c10d9cb5f',
-				'X-RapidAPI-Host': 'endlessmedicalapi1.p.rapidapi.com'
-			}
-		};
-
-		$.ajax(settings).done(function (response) {
-		
-			document.getElemetById("welcome-page");
-			console.log(response);
-		});
-	</script>
+   
 
 </body>
+
+<script defer="defer">
+	 let getEndlessAPIData= function(){
+		 const settings = {
+					async: true,
+					crossDomain: true,
+					url: 'https://endlessmedicalapi1.p.rapidapi.com/GetFeatures',
+					method: 'GET',
+					headers: {
+						'X-RapidAPI-Key': '3c1fe96527mshf1a599531d3e26dp1724b4jsn885c10d9cb5f',
+						'X-RapidAPI-Host': 'endlessmedicalapi1.p.rapidapi.com'
+					}
+				};
+
+		 $.ajax(settings).done(function(response) {
+				
+				let div = document.getElementById("welcome-page");
+				let data=""
+				for (let i=0; i<10; i++) {
+					data+= response.data[i] + "\n"
+				}
+				div.innerText= data
+				console.log(response);
+			});
+			
+		}
+		
+	</script>
 </html>
 

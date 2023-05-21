@@ -11,7 +11,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>java</title>
+    <title>MediMinder</title>
     <!-- <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css"> -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/main.css"> <!-- change to match your file/naming structure -->
@@ -22,17 +22,21 @@
 
 	<nav class="navbar navbar-light bg-light" >
 		  <div class="container" >
-		    <a class="navbar-brand" href="#">
+		    <a class="navbar-brand" href="/">
 		      <img src="/images/Background.png" alt="" width="200px;" height="160px;">
 		    </a>
+
 		    <form id="logoutForm" method="POST" action="/logout">
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <input type="submit" value="Logout!" class="btn btn-success" />
     </form>
+
 		  </div>
 		</nav>
 	<div class="admin-body">
+		<form:form action="/addClinic" method="post" modelArribute="newClinic">
 		<div class="clinic-in">
+
 			<h4 style="color:#198754;">Add a new Clinic</h4>
 			<div class="form-outline mb-4">
 			<form:form action="/clinicregister" method="post" modelAttribute="newClinic" >
@@ -72,6 +76,7 @@
             <form:errors path="confirm" class="text-danger" />
           </div>
           <input type="submit" value="Add Clinic" class="btn btn-success btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem;" />
+
 		</div>
 		 </form:form>
 		<div class="clinic-table">
@@ -83,7 +88,7 @@
 			      <th scope="col">Clinic Name</th>
 			      <th scope="col">Email</th>
 			      <th scope="col">Phone No.</th>
-			      <th scope="col">Adress</th>
+			      <th scope="col">Address</th>
 			    </tr>
 			  </thead>
 			  <tbody>
