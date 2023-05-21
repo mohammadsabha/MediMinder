@@ -27,7 +27,6 @@
           class="img-fluid" alt="Sample image">
       </div>
       <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-        <form>
           <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
             <p class="lead fw-normal mb-0 me-3">Sign in </p>
             <button type="button" class="btn btn-success btn-floating mx-1">
@@ -46,10 +45,10 @@
           <div class="divider d-flex align-items-center my-4">
             <p class="text-center fw-bold mx-3 mb-0">with</p>
           </div>
-		<form:form action="/doctorLogin" method="post" > <!-- >modelAttirbute="newLoginDoctor" -->
-          <!-- Email input -->
+		<form:form action="/doctorlogin" method="post" modelAttribute="newLoginDoctor" > 
+          <!-- Email input -->							
           <div class="form-outline mb-4">
-            <input type="email" id="form3Example3" class="form-control form-control-lg"
+            <form:input type="email" id="form3Example3" path="email" class="form-control form-control-lg"
               placeholder="Enter a valid email address" />
             <label class="form-label" for="form3Example3">Email address</label>
              <form:errors path="email" class="text-danger"/>
@@ -57,7 +56,7 @@
 		
           <!-- Password input -->
           <div class="form-outline mb-3">
-            <input type="password" id="form3Example4" class="form-control form-control-lg"
+            <form:input type="password" id="form3Example4" path="password" class="form-control form-control-lg"
               placeholder="Enter password" />
             <label class="form-label" for="form3Example4">Password</label>
             <form:errors path="password" class="text-danger"/>
@@ -75,13 +74,12 @@
           </div>
 
           <div class="text-center text-lg-start mt-4 pt-2">
-            <button type="button" class="btn btn-success btn-lg"
+            <button type="submit" class="btn btn-success btn-lg"
               style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
             <!-- <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="#!"
                 class="link-danger">Register</a></p> -->
           </div>
 	</form:form>
-        </form>
       </div>
     </div>
   </div>

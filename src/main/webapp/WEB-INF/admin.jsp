@@ -34,7 +34,7 @@
 		  </div>
 		</nav>
 	<div class="admin-body">
-		<form:form action="/addClinic" method="post" modelArribute="newClinic">
+		
 		<div class="clinic-in">
 
 			<h4 style="color:#198754;">Add a new Clinic</h4>

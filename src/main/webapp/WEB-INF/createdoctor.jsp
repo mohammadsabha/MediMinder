@@ -33,12 +33,11 @@
 
                 <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Add a Doctor</p>
 
-                <form class="mx-1 mx-md-4">
-				<form:form action="/creatdoctor" method="post" modelAttribute="doctor">
+				<form:form action="/createdoctor"  class="mx-1 mx-md-4" method="post" modelAttribute="doctor">
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="text" id="form3Example1c" path="name" class="form-control" placeholder="Full Name" />
+                      <form:input type="text" id="form3Example1c" path="name" class="form-control" placeholder="Full Name" />
                       <form:errors path="name" class="text-danger"/>
                     </div>
                   </div>
@@ -46,7 +45,7 @@
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="email" id="form3Example3c" path="email" class="form-control" placeholder="Email" />
+                      <form:input type="email" id="form3Example3c" path="email" class="form-control" placeholder="Email" />
                       <form:errors path="email" class="text-danger"/>
                     </div>
                   </div>
@@ -54,7 +53,7 @@
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="text" id="form3Example4cd" path="phone" class="form-control" placeholder="Phone No." />
+                      <form:input type="text" id="form3Example4cd" path="phone" class="form-control" placeholder="Phone No." />
                       <form:errors path="phone" class="text-danger"/>
                     </div>
                   </div>
@@ -62,7 +61,7 @@
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="text" id="form3Example4cd" path="address" class="form-control" placeholder="Address" />
+                      <form:input type="text" id="form3Example4cd" path="address" class="form-control" placeholder="Address" />
                       <form:errors path="address" class="text-danger"/>
                     </div>
                   </div>
@@ -70,7 +69,7 @@
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="password" id="form3Example4c" path="password" class="form-control" placeholder="Password" />
+                      <form:input type="password" id="form3Example4c" path="password" class="form-control" placeholder="Password" />
                       <form:errors path="password" class="text-danger"/>
                     </div>
                   </div>
@@ -79,7 +78,7 @@
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="password" id="form3Example4c" path="confirm" class="form-control" placeholder="confirm Password" />
+                      <form:input type="password" id="form3Example4c" path="confirm" class="form-control" placeholder="confirm Password" />
                       <form:errors path="confirm" class="text-danger"/>
                     </div>
                   </div>
@@ -97,7 +96,6 @@
                     <button type="submit" class="btn btn-success btn-lg">Create Doctor</button>
                   </div>
 				</form:form>
-                </form>
 
               </div>
               <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">

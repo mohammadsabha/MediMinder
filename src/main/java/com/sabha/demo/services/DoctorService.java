@@ -8,9 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
-import com.sabha.demo.models.Clinic;
 import com.sabha.demo.models.Doctor;
-import com.sabha.demo.models.LoginClinic;
 import com.sabha.demo.models.LoginDoctor;
 import com.sabha.demo.repositories.DoctorRepo;
 
@@ -88,4 +86,7 @@ public class DoctorService {
             return doctor;
         }
     }
+	
+	
+	
 }

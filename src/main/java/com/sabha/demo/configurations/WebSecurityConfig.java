@@ -21,14 +21,14 @@ private UserDetailsService userDetailsService;
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests((authorize) -> authorize
-            		.requestMatchers("/create/**").hasRole("ADMIN")
+            		.requestMatchers("/admin/**").hasRole("ADMIN")
 //            		.requestMatchers("/", "/home").authenticated()
 	                .anyRequest().permitAll()
 
             )
             .formLogin(login -> login
                     .loginPage("/login")
-                    .defaultSuccessUrl("/create")
+                    .defaultSuccessUrl("/admin")
                     .permitAll()
                 )
             .logout(logout -> logout
