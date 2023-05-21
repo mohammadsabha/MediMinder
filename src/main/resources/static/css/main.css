@@ -1,4 +1,5 @@
 @charset "UTF-8";
+
 * {
 	margin:0;
 	padding:0;
@@ -41,10 +42,9 @@
 }
 .clinic-in h4 {
 	margin-bottom:30px;
-<<<<<<< Updated upstream
+
 }
-=======
-}
+
 .clinic-table {
 	margin-top:30px;
 }
@@ -76,4 +76,4 @@ border-radius: 50%;
 	margin-top:35px;
 }
 
->>>>>>> Stashed changes
+

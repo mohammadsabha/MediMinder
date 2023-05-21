@@ -12,6 +12,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
@@ -41,12 +43,10 @@ public class Doctor {
     private String email;
     
     @NotEmpty(message="phone is required!")
-    @Email(message="Please enter a valid phone number!")
     @Min(6)
     private Integer phone;
     
     @NotEmpty(message="address is required!")
-    @Email(message="Please enter a valid address!")
     private String address;
     
     
@@ -57,11 +57,23 @@ public class Doctor {
     private Date updatedAt;
     
     @ManyToOne(fetch = FetchType.LAZY)  
-    @JoinColumn(name="clinic_id")
-    private Clinic clinic;
+    @JoinColumn(name="user_id")
+    private User user;
     
     @OneToMany(mappedBy="doctor", fetch = FetchType.LAZY)
-    private List<Patient> patients;
+    private List<Appointment> appointments;
+    
+//    @ManyToMany(fetch = FetchType.LAZY)
+//    @JoinTable(
+//        name = "doctors_patients", 
+//        joinColumns = @JoinColumn(name = "doctor_id"), 
+//        inverseJoinColumns = @JoinColumn(name = "patient_id")
+//    )
+//    private List<Patient> patient;
+
+    
+
+    
   
 
     
@@ -70,25 +82,34 @@ public class Doctor {
     public Doctor() {}
     
     
-	public Clinic getClinic() {
-		return clinic;
+	public List<Appointment> getAppointments() {
+		return appointments;
 	}
 
 
-	public void setClinic(Clinic clinic) {
-		this.clinic = clinic;
+	public void setAppointments(List<Appointment> appointments) {
+		this.appointments = appointments;
 	}
 
 
-	public List<Patient> getPatients() {
-		return patients;
+	public User getClinic() {
+		return user;
 	}
 
 
-	public void setPatients(List<Patient> patients) {
-		this.patients = patients;
+	public void setClinic(User user) {
+		this.user = user;
 	}
 
+	
+	public User getUser() {
+		return user;
+	}
+
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 	public Long getId() {
 		return id;
