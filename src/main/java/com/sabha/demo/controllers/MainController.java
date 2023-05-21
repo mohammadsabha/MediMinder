@@ -114,7 +114,7 @@ public String clinic(Model model) {
 	
 	List<Doctor> allDoctors = doctorService.allDoctors();
 	model.addAttribute("allDoctors", allDoctors);
-	return "clinic.jsp";
+	return "home.jsp";
 }
 
 
