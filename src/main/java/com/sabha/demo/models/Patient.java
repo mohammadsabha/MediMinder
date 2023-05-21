@@ -11,6 +11,8 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
@@ -42,7 +44,7 @@ public class Patient {
     @Min(10)
     private String phone;
     
-
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date date;
     
     
@@ -67,10 +69,20 @@ public class Patient {
     @OneToMany(mappedBy="patient", fetch = FetchType.LAZY)
     private List<Appointment> appointments;
     
-
+	  @ManyToOne(fetch = FetchType.LAZY)
+	  @JoinColumn(name="clinic_id")
+	  private Clinic clinic;
     
     public Patient() {}
     
+	public Clinic getClinic() {
+		return clinic;
+	}
+
+	public void setClinic(Clinic clinic) {
+		this.clinic = clinic;
+	}
+
 	public List<Appointment> getAppointments() {
 		return appointments;
 	}

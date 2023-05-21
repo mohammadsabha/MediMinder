@@ -54,6 +54,10 @@ public class Appointment {
     @JoinColumn(name="patient_id")
     private Patient patient;
     
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="clinic_id")
+    private Clinic clinic;
+    
     public Appointment() {}
     
 	public Doctor getDoctor() {
@@ -102,6 +106,16 @@ public class Appointment {
 
 	public void setTreatment(String treatment) {
 		this.treatment = treatment;
+	}
+
+	
+	
+	public Clinic getClinic() {
+		return clinic;
+	}
+
+	public void setClinic(Clinic clinic) {
+		this.clinic = clinic;
 	}
 
 	public Date getCreatedAt() {
