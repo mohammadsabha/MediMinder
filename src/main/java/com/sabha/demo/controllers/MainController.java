@@ -8,7 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sabha.demo.models.Doctor;
@@ -108,29 +110,107 @@ public String clinic() {
 	return "clinic.jsp";
 }
 
+
+
+//--------------------------------start create doctor
 @GetMapping("/createdoctor")
-public String createDoctor() {
-	return "createDoctor.jsp";
+public String createDoctor(HttpSession session, Model model,@ModelAttribute("doctor") Doctor doctor) {
+
+ return "createDoctor.jsp";
+} 
+@PostMapping("/createdoctor")
+public String createDoctor2(@Valid @ModelAttribute("doctor") Doctor doctor, BindingResult result, Model model) {
+    if (result.hasErrors()) {
+        model.addAttribute("doctor", doctor);
+        return "createDoctor.jsp";
+    } else {
+    	doctorService.addDoctor(doctor);
+        return "redirect:/createdoctor";
+    }
+}
+//-----------------------------------end create doctor
+
+
+//-------------------------------start update doctor
+@GetMapping("/updatedoctor/{id}")
+public String updateDoctor(HttpSession session, Model model,@ModelAttribute("doctor") Doctor doctor,@PathVariable("id") Long id) {
+
+	Doctor doctor1 = doctorService.findDoctorById(id);
+	model.addAttribute("doctor1", doctor1);
+	 return "updateDoctor.jsp";
 }
 
-@GetMapping("/updatedoctor")
-public String updateDoctor() {
-	return "createDoctor.jsp";
-}
+@PutMapping("/updatedoctor/{id}")
+public String updateDoctor2(@Valid @ModelAttribute("doctor") Doctor doctor, BindingResult result, Model model,@PathVariable("id") Long id) {
+       if (result.hasErrors()) {
+    	   Doctor doctor1 =doctorService.findDoctorById(id);
 
+           model.addAttribute("doctor1", doctor1);
+           return "updateDoctor.jsp";
+       } else {
+    	   doctorService.addDoctor(doctor);
+           return "redirect:/updatedoctor/"+id;
+       }
+   }
+//-----------------------------------------------end update doctor
+
+
+//-----------------------------------------start create patient
 @GetMapping("/createpatient")
-public String createPatient() {
-	return "createPatient.jsp";
+public String createPatient(HttpSession session, Model model,@ModelAttribute("patient") Patient patient) {
+
+ return "createPatient.jsp";
+} 
+@PostMapping("/createpatient")
+public String createPatient2(@Valid @ModelAttribute("patient") Patient patient, BindingResult result, Model model) {
+    if (result.hasErrors()) {
+        model.addAttribute("patient", patient);
+        return "createPatient.jsp";
+    } else {
+    	patientService.addPatient(patient);
+        return "redirect:/createpatient";
+    }
+}
+//--------------------------------------end create patient
+
+//-----------------------------------------start update Patient
+@GetMapping("/updatePatient/{id}")
+public String updatePatient(HttpSession session, Model model,@ModelAttribute("patient") Patient patient,@PathVariable("id") Long id) {
+
+	Patient patient1 = patientService.findPatientById(id);
+	model.addAttribute("patient1", patient1);
+	 return "updatePatient.jsp";
 }
 
-@GetMapping("/updatePatient")
-public String updatePatient() {
-	return "updatePatient.jsp";
-}
+@PutMapping("/updatePatient/{id}")
+public String updatePatient2(@Valid @ModelAttribute("patient") Patient patient, BindingResult result, Model model,@PathVariable("id") Long id) {
+       if (result.hasErrors()) {
+    	   Patient patient1 = patientService.findPatientById(id);
 
-@GetMapping("/patient/{id}")
-public String showPatient() {
-	return "showPatient.jsp";
+           model.addAttribute("patient1", patient1);
+           return "updatePatient.jsp";
+       } else {
+    	   patientService.addPatient(patient);
+           return "redirect:/updatePatient/"+id;
+       }
+   }
+//-----------------------------------------end update Patient
+
+//---------------------------------------------start delete doctor
+@GetMapping("/deletedoctor/{id}")
+public String deleteDoctor(@PathVariable("id") Long id) {
+	doctorService.delelteDoctor(id);
+	return "redirect:/clinic";
 }
+//---------------------------------------end delete doctor
+
+
+//---------------------------------------------start delete patient
+@GetMapping("/deletepatient/{id}")
+public String deletePatient(@PathVariable("id") Long id) {
+	patientService.deletePatient(id);
+	return "redirect:/doctorhome";
+}
+//---------------------------------------end delete patient
 
 }

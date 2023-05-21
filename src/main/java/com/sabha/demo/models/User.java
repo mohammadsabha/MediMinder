@@ -39,7 +39,6 @@ public class User {
     private String name;
     
 
-
     @NotEmpty(message="Email is required!")
     @Email(message="Please enter a valid email!")
     private String email;
@@ -76,8 +75,8 @@ public class User {
     private List<Role> roles;
     
     public User() {}
-    
-    
+
+
 	public List<Doctor> getDoctors() {
 		return doctors;
 	}
