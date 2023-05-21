@@ -100,32 +100,46 @@ public String login() {
 	return "login.jsp";
 }
 
-@GetMapping("/doctorhome")
-public String doctorHome() {
-	return "doctorhome.jsp";
+//----------------------------start doctor login
+@GetMapping("/doctorLogin")
+public String doctorLogin() {
+	return "doctorLogin.jsp";
 }
+//---------------------------------end doctor login
+
+//@GetMapping("/doctorhome")
+//public String doctorHome(HttpSession session, Model model) {
+//	List<Patient> allPatients = patientService.allPatients();
+//	model.addAttribute("allPatients", allPatients);
+//	return "doctorhome.jsp";
+//}
+
 
 @GetMapping("/clinic")
-public String clinic() {
+public String clinic(Model model) {
+	List<Patient> allPatients = patientService.allPatients();
+	model.addAttribute("allPatients", allPatients);
+	
+	List<Doctor> allDoctors = doctorService.allDoctors();
+	model.addAttribute("allDoctors", allDoctors);
 	return "clinic.jsp";
 }
 
 
 
 //--------------------------------start create doctor
-@GetMapping("/createdoctor")
+@GetMapping("/creatdoctor")
 public String createDoctor(HttpSession session, Model model,@ModelAttribute("doctor") Doctor doctor) {
-
- return "createDoctor.jsp";
+ return "creatdoctor.jsp";
 } 
-@PostMapping("/createdoctor")
+@PostMapping("/creatdoctor")
 public String createDoctor2(@Valid @ModelAttribute("doctor") Doctor doctor, BindingResult result, Model model) {
     if (result.hasErrors()) {
         model.addAttribute("doctor", doctor);
-        return "createDoctor.jsp";
+        return "creatdoctor.jsp";
     } else {
     	doctorService.addDoctor(doctor);
-        return "redirect:/createdoctor";
+        return "redirect:/creatdoctor";
     }
 }
 //-----------------------------------end create doctor
@@ -156,19 +170,22 @@ public String updateDoctor2(@Valid @ModelAttribute("doctor") Doctor doctor, Bind
 
 
 //-----------------------------------------start create patient
-@GetMapping("/createpatient")
+@GetMapping("/doctorhome")
 public String createPatient(HttpSession session, Model model,@ModelAttribute("patient") Patient patient) {
-
- return "createPatient.jsp";
+	List<Patient> allPatients = patientService.allPatients();
+	model.addAttribute("allPatients", allPatients);
+ return "doctorhome.jsp";
 } 
-@PostMapping("/createpatient")
+@PostMapping("/doctorhome")
 public String createPatient2(@Valid @ModelAttribute("patient") Patient patient, BindingResult result, Model model) {
     if (result.hasErrors()) {
         model.addAttribute("patient", patient);
-        return "createPatient.jsp";
+    	List<Patient> allPatients = patientService.allPatients();
+    	model.addAttribute("allPatients", allPatients);
+        return "doctorhome.jsp";
     } else {
     	patientService.addPatient(patient);
-        return "redirect:/createpatient";
+        return "redirect:/doctorhome";
     }
 }
 //--------------------------------------end create patient

@@ -19,6 +19,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
@@ -48,6 +49,15 @@ public class Doctor {
     
     @NotEmpty(message="address is required!")
     private String address;
+    
+    @NotEmpty(message="Password is required!")
+    @Size(min=8, max=128, message="Password must be between 8 and 128 characters")
+    private String password;
+    
+    @Transient
+    @NotEmpty(message="Confirm Password is required!")
+    @Size(min=8, max=128, message="Confirm Password must be between 8 and 128 characters")
+    private String confirm;
     
     
     @Column(updatable=false)
@@ -82,6 +92,26 @@ public class Doctor {
     public Doctor() {}
     
     
+	public String getPassword() {
+		return password;
+	}
+
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+
+	public String getConfirm() {
+		return confirm;
+	}
+
+
+	public void setConfirm(String confirm) {
+		this.confirm = confirm;
+	}
+
+
 	public List<Appointment> getAppointments() {
 		return appointments;
 	}
