@@ -30,17 +30,20 @@
 	<div class="patient-body">
 	
 		<div class="appointment" style="margin-top:35px;">
-			<form:form action="/addAppointment" method="post" modelAttribute="appointment">
+			<form:form action="/addAppointment/${patient.id}" method="post" modelAttribute="appointment">
+			<form:input type="hidden" id="form3Example4c" path="clinic" value="${clinic_id}" class="form-control" placeholder="Password" />
+			<form:input type="hidden" id="form3Example4c" path="doctor" value="${doctor_id}" class="form-control" placeholder="Password" />
+			<form:input type="hidden" id="form3Example4c" path="patient" value="${patient.id}" class="form-control" placeholder="Password" />
 				<div class="form-outline w-100 mb-4">
-				  <textarea class="form-control" id="textAreaExample4" rows="3" placeholder="symptoms"></textarea>
+				  <form:textarea class="form-control" id="textAreaExample4" path="symptoms" rows="3" placeholder="symptoms"></form:textarea>
 				  
 				</div>
 				<div class="form-outline w-100 mb-4">
-				  <textarea class="form-control" id="textAreaExample4" rows="3" placeholder="diagnosis"></textarea>
+				  <form:textarea class="form-control" id="textAreaExample4" path="diagnosis" rows="3" placeholder="diagnosis"></form:textarea>
 				  
 				</div>
 				<div class="form-outline w-100 mb-4">
-				  <textarea class="form-control" id="textAreaExample4" rows="3" placeholder="treatment"></textarea>
+				  <form:textarea class="form-control" id="textAreaExample4" path="treatment" rows="3" placeholder="treatment"></form:textarea>
 				  
 				</div>
 				<input class="btn btn-success" id="toright" type="submit" value="Submit">				
@@ -49,26 +52,45 @@
 	
 	
 		<div class="ptn-right">
+		<c:forEach var="apt" items="${patient.appointments}">
 			<div class="list-group">
 				
 				<a href="#" class="list-group-item list-group-item-action">
 				  <div class="d-flex w-100 justify-content-between">
-					<h5 class="mb-1">List group item heading</h5>
+					<h5 class="mb-1">Symptoms</h5>
 				  </div>
-				  <p class="mb-1">Some placeholder content in a paragraph.</p>
+				  <p class="mb-1">${apt.symptoms}</p>
 				  <small class="text-body-secondary">And some muted small print.</small>
 				</a>
+				
+				
+			</div>
+			<div class="list-group">
 				
 				<a href="#" class="list-group-item list-group-item-action">
 				  <div class="d-flex w-100 justify-content-between">
-					<h5 class="mb-1">List group item heading</h5>
+					<h5 class="mb-1">Diagnosis</h5>
 				  </div>
-				  <p class="mb-1">Some placeholder content in a paragraph.</p>
+				  <p class="mb-1">${apt.diagnosis}</p>
 				  <small class="text-body-secondary">And some muted small print.</small>
 				</a>
 				
+				
 			</div>
 			
+			<div class="list-group">
+				
+				<a href="#" class="list-group-item list-group-item-action">
+				  <div class="d-flex w-100 justify-content-between">
+					<h5 class="mb-1">Treatment</h5>
+				  </div>
+				  <p class="mb-1">${apt.treatment}</p>
+				  <small class="text-body-secondary">And some muted small print.</small>
+				</a>
+				
+				
+			</div>
+			</c:forEach> 
 		
 		</div>
 		

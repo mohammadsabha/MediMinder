@@ -65,7 +65,11 @@ public class Clinic {
     @OneToMany(mappedBy="clinic", fetch = FetchType.LAZY)
     private List<Doctor> doctors;
   
+    @OneToMany(mappedBy="clinic", fetch = FetchType.LAZY)
+    private List<Patient> patients;
     
+    @OneToMany(mappedBy="clinic", fetch = FetchType.LAZY)
+    private List<Appointment> appointments;
     
     public Clinic() {}
     
@@ -156,6 +160,16 @@ public class Clinic {
 	
 
 	
+
+
+	public List<Patient> getPatients() {
+		return patients;
+	}
+
+
+	public void setPatients(List<Patient> patients) {
+		this.patients = patients;
+	}
 
 
 	@PreUpdate

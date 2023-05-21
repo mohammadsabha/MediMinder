@@ -29,6 +29,17 @@ public class ClinicService {
 	}
 	 
     
+    
+    public Clinic findClinic(Long id) {
+        Optional<Clinic> optionalClinic = clinicRepo.findById(id);
+        if(optionalClinic.isPresent()) {
+            return optionalClinic.get();
+        } else {
+            return null;
+        }
+    }
+    
+    
     // 3
     
 	

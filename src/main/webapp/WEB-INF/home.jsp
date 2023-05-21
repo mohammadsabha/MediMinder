@@ -23,7 +23,7 @@
 	    <a class="navbar-brand" href="/home">
 	      <img src="/images/Background.png" alt="" width="200" height="160">
 	    </a>
-	    <a class="btn btn-success" href="/logout" role="button">LogOut</a>
+	    <a class="btn btn-success" href="/logouty" role="button">LogOut</a>
 	  </div>
 	</nav>
    <div class="body-container">
@@ -40,7 +40,7 @@
 			  </thead>
 			  <tbody>
 
-			  <c:forEach var="dr" items="${allDoctors}">
+			  <c:forEach var="dr" items="${doctors}">
 
 			    <tr>
 			      <td>${dr.name}</td>
@@ -66,7 +66,7 @@
 			  </thead>
 			  <tbody>
 
-			  <c:forEach var="pnt" items="${allPatients}">
+			  <c:forEach var="pnt" items="${patients}">
 
 			    <tr>
 			      <td>${pnt.name}</td>

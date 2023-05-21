@@ -30,23 +30,24 @@
 		<div class="dr-in">
 			<h4 style="color:#198754;">Add a new patient</h4>
 			<form:form action="/createPatient" method="post" modelAttribute="patient">
+			<form:input type="hidden" id="form3Example4c" path="clinic" value="${clinic_id}" class="form-control" placeholder="Password" />
 			<div class="form-outline mb-4">
-            <input type="text" id="form3Example3" path="name" class="form-control form-control-lg"
+            <form:input type="text" id="form3Example3" path="name" class="form-control form-control-lg"
               placeholder="Patient Name" />
             <form:errors path="name" class="text-danger"/>
           </div>
           <div class="form-outline mb-4">
-            <input type="email" id="form3Example3" path="email" class="form-control form-control-lg"
+            <form:input type="email" id="form3Example3" path="email" class="form-control form-control-lg"
               placeholder="Enter a valid email address" />
             <form:errors path="email" class="text-danger"/>
           </div>
           <div class="form-outline mb-4">
-            <input type="text" id="form3Example3" path="phone" class="form-control form-control-lg"
+            <form:input type="text" id="form3Example3" path="phone" class="form-control form-control-lg"
               placeholder="Phone No." />
             <form:errors path="phone" class="text-danger"/>
           </div>
           <div class="form-outline mb-4">
-            <input type="date" id="form3Example3" path="date" class="form-control form-control-lg"
+            <form:input type="date" id="form3Example3" path="date" class="form-control form-control-lg"
               placeholder="BirthDay" />
             <form:errors path="date" class="text-danger"/>
           </div>
@@ -65,14 +66,14 @@
 			    </tr>
 			  </thead>
 			  <tbody>
-			  <C:forEach var="pnt" items="${allPatients}">
+			  <c:forEach var="pnt" items="${allPatients}">
 			    <tr>
-			      <td>${pnt.name}</td>
+			      <td><a href="/patient/${pnt.id}">${pnt.name}</a></td>
 			      <td>${pnt.email}</td>
 			      <td>${pnt.date}</td>
 			      <td>${pnt.phone}</td>
 			    </tr>
-			   </C:forEach> 
+			   </c:forEach> 
 			   </tbody>
 			</table>
 		</div>

@@ -13,12 +13,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.sabha.demo.models.Appointment;
 import com.sabha.demo.models.Clinic;
 import com.sabha.demo.models.Doctor;
 import com.sabha.demo.models.LoginClinic;
 import com.sabha.demo.models.LoginDoctor;
 import com.sabha.demo.models.Patient;
 import com.sabha.demo.models.User;
+import com.sabha.demo.services.AppointmentService;
 import com.sabha.demo.services.ClinicService;
 import com.sabha.demo.services.DoctorService;
 import com.sabha.demo.services.PatientService;
@@ -37,6 +39,9 @@ public class MainController {
 	
 	@Autowired
 	private ClinicService clinicServ;
+	
+	@Autowired
+	private AppointmentService appointmentServ;
 	
 @RequestMapping("/")
 
@@ -87,18 +92,25 @@ public String clinicLogin(@Valid @ModelAttribute("newLogin") LoginClinic newLogi
     return "redirect:/clinic";
 }
 
-@GetMapping("/home")
-public String home(Model model) {
+@GetMapping("/clinic")
+public String home(Model model,HttpSession session) {
 	// Retrieve all doctors
-    List<Doctor> doctors = doctorService.allDoctors();
+	if (session.getAttribute("clinic_id") == null) {
+		return "redirect:/logouty";
+	}
+	Clinic clinic=clinicServ.findClinic((Long) session.getAttribute("clinic_id"));
+	
+    List<Doctor> doctors = clinic.getDoctors();
 
     // Retrieve all patients
-    List<Patient> patients = patientService.allPatients();
+    List<Patient> patients = clinic.getPatients();
 
     // Add the doctors and patients to the model
     model.addAttribute("doctors", doctors);
     model.addAttribute("patients", patients);
 	return "home.jsp";
+	
+	
 }
 
 
@@ -125,7 +137,7 @@ public String doctorLogin(Model model,@ModelAttribute("newLoginDoctor") LoginDoc
 	        return "index.jsp";
 	    }
 	    session.setAttribute("doctor_id", doctor.getId());
-	    return "redirect:/home";
+	    return "redirect:/doctorhome";
 	}
 //---------------------------------end doctor login
 
@@ -137,15 +149,7 @@ public String doctorLogin(Model model,@ModelAttribute("newLoginDoctor") LoginDoc
 //}
 
 
-@GetMapping("/clinic")
-public String clinic(Model model) {
-	List<Patient> allPatients = patientService.allPatients();
-	model.addAttribute("allPatients", allPatients);
-	
-	List<Doctor> allDoctors = doctorService.allDoctors();
-	model.addAttribute("allDoctors", allDoctors);
-	return "home.jsp";
-}
+
 
 
 
@@ -194,8 +198,14 @@ public String updateDoctor2(@Valid @ModelAttribute("doctor") Doctor doctor, Bind
 //-----------------------------------------start create patient
 @GetMapping("/doctorhome")
 public String createPatient(HttpSession session, Model model,@ModelAttribute("patient") Patient patient) {
-	List<Patient> allPatients = patientService.allPatients();
+	if (session.getAttribute("doctor_id") == null) {
+		return "redirect:/logouty";
+	}
+	Doctor doctor=doctorService.findDoctorById((Long) session.getAttribute("doctor_id"));
+	Long clinic_id=doctor.getClinic().getId();
+	List<Patient> allPatients = doctor.getClinic().getPatients();
 	model.addAttribute("allPatients", allPatients);
+	model.addAttribute("clinic_id", clinic_id);
  return "doctorhome.jsp";
 } 
 	@PostMapping("/createPatient")
@@ -214,9 +224,11 @@ public String createPatient(HttpSession session, Model model,@ModelAttribute("pa
 
 //______________________________________start patient page
 @GetMapping("/patient/{id}")
-public String patientPage(@PathVariable("id") Long id , Model model) {
+public String patientPage(@PathVariable("id") Long id , Model model,@ModelAttribute("appointment") Appointment appointment) {
 Patient patient1 = patientService.findPatientById(id);
+Long clinic_id=patient1.getClinic().getId();
 model.addAttribute("patient", patient1);
+model.addAttribute("clinic_id", clinic_id);
 return "patientpage.jsp";
 }
 
@@ -260,5 +272,24 @@ public String deletePatient(@PathVariable("id") Long id) {
 	return "redirect:/doctorhome";
 }
 //---------------------------------------end delete patient
+
+@GetMapping("/logouty")
+	public String logout(HttpSession session) {
+	session.invalidate();
+	return "redirect:/";
+}
+
+@PostMapping("/addAppointment/{pt_id}")
+public String createAppointment(@Valid @ModelAttribute("appointment") Appointment appointment, BindingResult result, Model model,@PathVariable("pt_id") Long pt_id) {
+    if (result.hasErrors()) {
+        model.addAttribute("appointment", appointment);
+        Patient patient1 = patientService.findPatientById(pt_id);
+    	model.addAttribute("patient", patient1);
+        return "doctorhome.jsp";
+    } else {
+    	appointmentServ.createAppointment(appointment);
+        return "redirect:/patient/"+pt_id;
+    }
+}
 
 }
