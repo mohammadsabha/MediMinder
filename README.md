@@ -25,11 +25,11 @@ The development of MediMinder was a collaborative effort by the following team m
 ##### Many To Many Realationships
 1.User & Role
 ##### One To Many Relationships
-1.Clinic & Doctor
-2.Clinic & Patient
-3.Clinic & Appointment
-4.Doctor & Appointment
-5.Patient & Appointment
+1.Clinic & Doctor </br>
+2.Clinic & Patient </br>
+3.Clinic & Appointment </br>
+4.Doctor & Appointment </br>
+5.Patient & Appointment 
 
 ## Security and Validation
 1.Control Access for Admin page using Spring Security. </br>
